@@ -1,14 +1,11 @@
 
+// Bubble Sort
 
-// BUBBLE SORT
-
-function bubbleSort(arr){
+function BubbleSort(arr){
     let swapped ;
-    
     do{
-        swapped = false
-
-        for(let i=0 ; i< arr.length - 1; i++){
+        swapped = false;
+        for(let i=0;i<arr.length-1;i++){
             if(arr[i] > arr[i+1]){
                 let temp = arr[i]
                 arr[i] = arr[i+1]
@@ -18,18 +15,16 @@ function bubbleSort(arr){
             }
         }
     }while(swapped)
-
-    return arr    
+        return arr
 }
+let arr = [8,1,9,10,3,2,-5,6,8]
+//console.log(BubbleSort(arr))
 
-//let arr = [6,3,-4,9,2,-9,1,3]
-console.log(bubbleSort(arr));
+//////////////////////////////////
 
+// Selection Sort
 
-//SELECTION SORT
-
-function selectioSort(arr){
-
+function SelectionSort(arr){
     for(let i=0;i<arr.length-1;i++){
         let min = i
         for(let j=i+1;j<arr.length;j++){
@@ -37,40 +32,48 @@ function selectioSort(arr){
                 min = j
             }
         }
-        if(min != i){
-            [arr[i], arr[min]] = [arr[min], arr[i]]
+        if(min !== i){
+            [arr[i], arr[min]] = [arr[min],arr[i]]
         }
     }
     return arr
 }
 
+//console.log(SelectionSort(arr))
 
-// INSERTION SORT
 
-function insertionSort(arr){
+//////////////////////
 
-    for(let i=1;i<arr.length;i++){
-        let numInsert = arr[i]
+//Insertion Sort
+
+function InsertionSort(arr){
+
+    for(let i =1;i<arr.length;i++){
+        let key = arr[i]
         let j = i-1
-        while(j >= 0 && arr[j] > numInsert){
+
+        while(j >= 0 && arr[j] > key){
             arr[j+1] = arr[j]
             j--
         }
-        arr[j+1] = numInsert
+        arr[j+1] = key
     }
     return arr
 }
 
-console.log(insertionSort(arr))
+//console.log(InsertionSort(arr))
 
+//////////////////////////
 
-// QUICK SORT
+// Quick Sort
 
-function quickSort(arr){
-    if(arr.length < 2) return arr
+function QuickSort(arr){
+    if(arr.length < 1) return arr
 
-    let pivot = arr[arr.length-1]
-    let left = [], right = [], equal = []
+    let pivot = arr[arr.length-1 ]
+    let left = []
+    let right = []
+    let equal = []
 
     for(let i=0;i<arr.length;i++){
         if(arr[i] < pivot){
@@ -82,47 +85,44 @@ function quickSort(arr){
         }
     }
 
-    return [...quickSort(left),...equal, ...quickSort(right)]
-
+    return ([...QuickSort(left),...equal, ...QuickSort(right)])
+    
 }
 
-console.log(quickSort(arr))
+
+console.log(QuickSort(arr))
+
+///////////////////////////////////
 
 
+// Merge Sort
 
-let arr = [5,6,-5,1,9,2,1,0,10]
-console.log(selectioSort(arr))
-
-
-// MERGE SORT
-
-function mergeSort(arr){
+function MergeSort(arr){
     if(arr.length < 2) return arr
 
-    const mid = Math.floor(arr.length / 2)
-    const leftArr = arr.slice(0, mid)
-    const rightArr = arr.slice(mid)
+    let midd = Math.floor(arr.length / 2)
+    let left = arr.slice(0,midd)
+    let right = arr.slice(midd)
 
-    return merge(mergeSort(leftArr), mergeSort(rightArr))
+    return merge (MergeSort(left), MergeSort(right))
 }
 
+function merge(left,right){
 
-function merge(leftArr, rightArr){
+    let sorted = []
 
-    const sortedArr = []
-
-    while(leftArr.length && rightArr.length){
-        if(leftArr[0] <= rightArr[0]){
-            sortedArr.push(leftArr.shift())
+    while(left.length && right.length){
+        if(left[0] < right[0]){
+            sorted.push(left.shift())
         }else{
-            sortedArr.push(rightArr.shift())
+            sorted.push(right.shift())
         }
     }
 
-    return [...sortedArr, ...leftArr, ...rightArr]
+    return [...sorted,...left,...right]
 }
 
-console.log(mergeSort(arr))
+console.log(MergeSort(arr))
 
 
 //MERGING TWO SORTED ARRAY IN TO A SINGLE SORTED ARRAY
