@@ -104,7 +104,8 @@ function MergeSort(arr){
     let left = arr.slice(0,midd)
     let right = arr.slice(midd)
 
-    return merge (MergeSort(left), MergeSort(right))
+    return merge
+    (MergeSort(left), MergeSort(right))
 }
 
 function merge(left,right){

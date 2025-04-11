@@ -20,7 +20,7 @@ function merge(list1, list2){
         finalList = finalList.next
     }
     
-    finalList = list1 || list2
+    finalList.next = list1 || list2
     
     return sample.next
 }

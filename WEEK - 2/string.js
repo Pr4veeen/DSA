@@ -1,5 +1,5 @@
-let word = "apple"
+// let word = "apple"
 
-let ans = word.split('').map((char, index) => char.repeat(index + 1)).join("-")
+// let ans = word.split('').map((char, index) => char.repeat(index + 1)).join("-")
 
-console.log(ans)
+// console.log(ans)
