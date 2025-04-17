@@ -68,7 +68,7 @@ class Trie {
 
 }
 
-const trie = new Trie()
+//const trie = new Trie()
 
 trie.insert("cat");
 trie.insert("can");
