@@ -165,15 +165,64 @@ console.log(bst.search(bst.root,10))
 console.log(bst.search(bst.root,5))
 console.log(bst.search(bst.root,154))
 
-// bst.preOrder(bst.root)
-// console.log("////////")
-// bst.inOrder(bst.root)
-// console.log("////////")
-// bst.postOrder(bst.root)
+bst.preOrder(bst.root)
+console.log("////////")
+bst.inOrder(bst.root)
+console.log("////////")
+bst.postOrder(bst.root)
 
  bst.levelOrder()
-// console.log(bst.Min(bst.root))
-// console.log(bst.Max(bst.root))
+console.log(bst.Min(bst.root))
+console.log(bst.Max(bst.root))
 console.log("//////////")
 bst.delete(15)
 bst.levelOrder()
+
+
+///////////////////////////////
+
+
+//  Find the Closest Value to a Given Number in a BST
+
+function findClosestValue(tree, target) {
+    let closest = tree.data;
+  
+    function search(node) {
+      if (!node) return;
+  
+      if (Math.abs(target - node.data) < Math.abs(target - closest)) {
+        closest = node.data;
+      }
+  
+      if (target < node.data) search(node.left);
+      else if (target > node.data) search(node.right);
+      else return;
+    }
+  
+    search(tree);
+    return closest;
+  }
+  
+  // Test
+  console.log("Closest to 16:",findClosestValue(bst.root, 16));  
+
+  
+  ////////////////////////////////////
+
+  // Validate Whether a Given Tree is a BST
+
+
+  function isValidBST(node, min = -Infinity, max = Infinity) {
+    if (!node) return true;
+  
+    if (node.data <= min || node.data >= max) return false;
+  
+    return (
+      isValidBST(node.left, min, node.data) &&
+      isValidBST(node.right, node.data, max)
+    );
+  }
+  
+  
+  console.log("Is valid BST:", isValidBST(bst.root)); 
+  
