@@ -151,6 +151,63 @@ class BinarySearchTree {
         }
         return root
     }
+
+    Height(root){
+        if(root === null){
+            return -1
+        }
+
+        const leftHeight = this.Height(root.left)
+        const rightHeight = this.Height(root.right)
+
+        return 1 + Math.max(leftHeight, rightHeight)
+    }
+
+    // Find Nth largest
+    NthLargest(n){
+        this.count = 0
+        this.nthLargest = null
+        this.FindNthLarge(this.root, n)
+        return this.nthLargest
+    }
+
+    FindNthLarge(root, n){
+        if(!root){
+            return
+        }
+        this.FindNthLarge(root.right,n)
+        this.count++
+
+        if(this.count === n){
+            this.nthLargest = root.value
+        }
+        this.FindNthLarge(root.left, n)
+    }
+
+    
+    // Find Second largest
+    SecondLargest(){
+        if(!this.root || !this.root.left && !this.root.right){
+            return null
+        }
+
+        let current = this.root
+        while(current){
+            if(current.right && !current.right.right && !current.right.left){
+                return current.value
+            }
+
+            if(current.right && !current.right.right && current.right.left){
+                return this.Max(current.right.left)
+            }
+
+            if(current.right){
+                current = current.right
+            }else{
+                return this.Max(current.left)
+            }
+        }
+    }
 }
 
 const bst = new BinarySearchTree()
@@ -177,7 +234,12 @@ console.log(bst.Max(bst.root))
 console.log("//////////")
 bst.delete(15)
 bst.levelOrder()
+console.log("//////////")
 
+console.log(bst.Height(bst.root))
+
+console.log("nth lage",bst.NthLargest(4))
+console.log("second largest", bst.SecondLargest())
 
 ///////////////////////////////
 
@@ -203,8 +265,8 @@ function findClosestValue(tree, target) {
     return closest;
   }
   
-  // Test
-  console.log("Closest to 16:",findClosestValue(bst.root, 16));  
+  
+  //console.log("Closest to 16:",findClosestValue(bst.root, 16));  
 
   
   ////////////////////////////////////
@@ -224,5 +286,5 @@ function findClosestValue(tree, target) {
   }
   
   
-  console.log("Is valid BST:", isValidBST(bst.root)); 
+//   console.log("Is valid BST:", isValidBST(bst.root)); 
   
